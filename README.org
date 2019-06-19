@@ -1,0 +1,11 @@
+* My i3wm configuration [WIP]
+** Requirements:
+    - =xbacklight=
+    - =i3wm=
+    - =playerctl=
+    - =xautolock=
+    - =blueman= (for Bluetooth)
+    - =NetworkManager=
+    - =pulseaudio=
+    - =keynav=
+    - =rofi=

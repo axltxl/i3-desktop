@@ -1,0 +1,38 @@
+!-------------------------------------------------------------------------------
+! Base16 Dracula
+! Author: Mike Barkmin (http://github.com/mikebarkmin) based on Dracula Theme (http://github.com/dracula)
+!-------------------------------------------------------------------------------
+
+#define base00 #282936
+#define base01 #3a3c4e
+#define base02 #4d4f68
+#define base03 #626483
+#define base04 #62d6e8
+#define base05 #e9e9f4
+#define base06 #f1f2f8
+#define base07 #f7f7fb
+#define base08 #ea51b2
+#define base09 #b45bcf
+#define base0A #00f769
+#define base0B #ebff87
+#define base0C #a1efe4
+#define base0D #62d6e8
+#define base0E #b45bcf
+#define base0F #00f769
+
+*color_base00: #282936
+*color_base01: #3a3c4e
+*color_base02: #4d4f68
+*color_base03: #626483
+*color_base04: #62d6e8
+*color_base05: #e9e9f4
+*color_base06: #f1f2f8
+*color_base07: #f7f7fb
+*color_base08: #ea51b2
+*color_base09: #b45bcf
+*color_base0A: #00f769
+*color_base0B: #ebff87
+*color_base0C: #a1efe4
+*color_base0D: #62d6e8
+*color_base0E: #b45bcf
+*color_base0F: #00f769

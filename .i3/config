@@ -1,0 +1,343 @@
+# i3 config file (v4)
+###################################
+# i3wm base configuration variables
+##################################
+
+## Base16 Dracula
+#################
+set_from_resource $color_base00 i3wm.color_base00
+set_from_resource $color_base01 i3wm.color_base01
+set_from_resource $color_base02 i3wm.color_base02
+set_from_resource $color_base03 i3wm.color_base03
+set_from_resource $color_base04 i3wm.color_base04
+set_from_resource $color_base05 i3wm.color_base05
+set_from_resource $color_base06 i3wm.color_base06
+set_from_resource $color_base07 i3wm.color_base07
+set_from_resource $color_base08 i3wm.color_base08
+set_from_resource $color_base09 i3wm.color_base09
+set_from_resource $color_base0A i3wm.color_base0A
+set_from_resource $color_base0B i3wm.color_base0B
+set_from_resource $color_base0C i3wm.color_base0C
+set_from_resource $color_base0D i3wm.color_base0D
+set_from_resource $color_base0E i3wm.color_base0E
+set_from_resource $color_base0F i3wm.color_base0F
+
+## Modifier settings
+# One prefix to rule them all
+set $key_mod1 Mod4
+set $key_mod2 Mod1
+
+# Default binding for escaping i3 "modes"
+set $key_mode_exit ctrl+bracketleft
+
+# Font-related variables
+set $font pango:Inconsolata LGC
+set $font_size 11
+
+## Commands
+###########
+
+# Screen brightness command
+set $cmd_backlight_up xbacklight -inc 2
+set $cmd_backlight_dn xbacklight -dec 2
+
+# Multimedia commands
+set $cmd_audio_volup     "pactl set-sink-mute 0 0; pactl set-sink-volume @DEFAULT_SINK@ +5%"
+set $cmd_audio_voldown   "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+set $cmd_audio_volmute   "pactl set-sink-mute 0 1"
+set $cmd_audio_playpause "playerctl play-pause"
+set $cmd_audio_next      "playerctl next"
+set $cmd_audio_prev      "playerctl previous"
+
+# Text editor
+set $cmd_editor emacs
+
+# i3lock wrapper
+set $autolock i3lock
+
+# music player
+set $cmd_au_player spotify
+set $cmd_au_player_class Spotify
+
+# wallpaper manager
+set $cmd_wallpaper_manager nitrogen
+set $cmd_wallpaper_manager_class Nitrogen
+
+# sound manager
+set $cmd_au_manager       pavucontrol
+set $cmd_au_manager_class Pavucontrol
+
+# www browser
+set $browser       google-chrome
+set $browser_class chromium-browser
+
+# terminal of choice
+set $term hyper
+set $term_class Hyper
+
+# i3pystatus
+set $cmd_status      ~/.i3/pystatus/bin/python3
+set $cmd_status_conf ~/.i3/status.py
+
+# app launcher
+set $cmd_app_launcher rofi -show drun
+
+# window switcher
+set $cmd_window_switcher rofi -show window
+
+# workspaces
+set $ws1 "!"
+set $ws2 "@"
+set $ws3 "#"
+set $ws4 "%"
+
+#################
+# i3 key mappings
+#################
+
+## App launch shortcuts
+set $mode_app_launch \
+    "launch | [t]erm [e]ditor [l]auncher"
+bindsym $key_mod1+a mode $mode_app_launch
+mode $mode_app_launch {
+    # start a terminal
+    bindsym t exec $term; mode "default"
+
+    # start the editor
+    bindsym e exec $cmd_editor; mode "default"
+
+    # launch an app
+    bindsym l exec $cmd_app_launcher; mode "default"
+
+    # go back
+    bindsym $key_mode_exit mode "default"
+}
+
+## Window management
+####################
+
+# window mode
+set $mode_window \
+  "window | [m]ove [r]esize [t]erm [e]ditor [d]elete f[u]llsreen s[w]itch"
+bindsym $key_mod1+w mode $mode_window
+mode $mode_window {
+    # enter window-move mode
+    bindsym m mode $mode_window_move
+
+    # enter window-resize mode
+    bindsym r mode $mode_window_resize
+
+    # enter window-toggle mode
+    bindsym shift+t mode $mode_window_toggle
+
+    # switch to terminal
+    bindsym t [class=$term_class] focus; mode "default"
+
+    # switch to editor
+    bindsym e [class=$editor_class] focus; mode "default"
+
+    # kill focused window
+    bindsym d kill; mode "default"
+
+    # enter fullscreen mode for the focused container
+    bindsym u fullscreen; mode "default"
+
+    # switch window
+    bindsym w exec $cmd_window_switcher; mode "default"
+
+    # go back
+    bindsym $key_mode_exit mode "default"
+}
+
+# window-move mode
+set $mode_window_move "window-move | [hjkl] move"
+mode $mode_window_move {
+    # move focused window
+    bindsym h move left
+    bindsym j move down
+    bindsym k move up
+    bindsym l move right
+
+    # move focused container to workspace
+    bindsym a move container to workspace $ws1; mode "default"
+    bindsym s move container to workspace $ws2; mode "default"
+    bindsym d move container to workspace $ws3; mode "default"
+    bindsym f move container to workspace $ws4; mode "default"
+
+    # go back
+    bindsym Return         mode "default"
+    bindsym $key_mode_exit mode "default"
+}
+
+# window-toggle mode
+set $mode_window_toggle "window-toggle | [s]plit"
+mode $mode_window_toggle {
+
+    # change container layout (stacked, tabbed, toggle split)
+    bindsym s layout toggle split
+
+    # go back
+    bindsym $key_mode_exit mode "default"
+}
+
+# window-resize mode
+set $mode_window_resize "window-resize | [hjkl] resize"
+mode $mode_window_resize {
+        # These bindings trigger as soon as you enter the resize mode
+        bindsym h resize shrink width  48 px
+        bindsym k resize grow height   48 px
+        bindsym j resize shrink height 48 px
+        bindsym l resize grow width    48 px
+
+        # go back
+        bindsym Return mode "default"
+        bindsym $key_mode_exit mode "default"
+}
+
+# change focus
+bindsym $key_mod1+h focus left
+bindsym $key_mod1+j focus down
+bindsym $key_mod1+k focus up
+bindsym $key_mod1+l focus right
+
+# Desktop management
+######################
+set $mode_i3 "i3 | [r]estart e[x]it [l]ock screen"
+
+# i3-mode
+bindsym $key_mod1+i mode $mode_i3
+mode $mode_i3 {
+    # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+    bindsym r exec "i3-msg restart"; mode "default"
+
+    # exit i3 (logs you out of your X session)
+    bindsym x exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+    # lock the screen
+    bindsym l exec $autolock; mode "default"
+
+    # go back
+    bindsym $key_mode_exit mode "default"
+}
+
+
+# switch to workspace
+# bindsym $key_mod1+a workspace $ws1
+bindsym $key_mod1+s workspace $ws2
+# bindsym $key_mod1+d workspace $ws3
+bindsym $key_mod1+f workspace $ws4
+
+
+# Multimedia keys
+#################
+
+# raise volume
+bindsym XF86AudioRaiseVolume       exec $cmd_audio_volup
+bindsym $key_mod1+$key_mod2+comma  exec $cmd_audio_volup
+
+# lower volume
+bindsym XF86AudioLowerVolume       exec $cmd_audio_voldown
+bindsym $key_mod1+$key_mod2+m      exec $cmd_audio_voldown
+
+# mute sound
+bindsym XF86AudioMute              exec $cmd_audio_volmute
+
+# Media player controls
+bindsym XF86AudioPlay              exec $cmd_audio_playpause
+bindsym $key_mod1+$key_mod2+space  exec $cmd_audio_playpause
+
+# Previous/next track
+bindsym XF86AudioNext              exec $cmd_audio_next
+bindsym $key_mod1+$key_mod2+slash  exec $cmd_audio_next
+
+bindsym XF86AudioPrev              exec $cmd_audio_prev
+bindsym $key_mod1+$key_mod2+period exec $cmd_audio_prev
+
+# Screen brightness controls
+############################
+
+# increase screen brightness
+bindsym XF86MonBrightnessUp   exec $cmd_backlight_up
+
+ # decrease screen brightness
+bindsym XF86MonBrightnessDown exec $cmd_backlight_dn
+
+############################
+# Floating modifier settings
+############################
+
+# Use Mouse+$key_mod1 to drag floating windows
+# to their wanted position
+floating_modifier $key_mod1
+
+####################
+# Font configuration
+####################
+
+# Font for window titles.
+font $font $font_size
+
+######################
+# Startup programs
+######################
+
+# NetworkManager
+exec nm-applet
+
+# xautolock
+exec --no-startup-id xautolock -time 8 -locker $autolock
+
+# set wallpapers
+exec_always --no-startup-id nitrogen --restore
+
+# pulseaudio
+exec pulseaudio --start
+
+# dunst takes charge as the notification daemon
+# exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
+
+# keynav
+exec --no-startup-id keynav
+
+#########################
+# Window colors
+#########################
+
+client.focused          $color_base03 $color_base03 $color_base00 $color_base01
+client.focused_inactive $color_base02 $color_base02 $color_base03 $color_base01
+client.unfocused        $color_base01 $color_base01 $color_base03 $color_base01
+client.urgent           $color_base02 $color_base08 $color_base07 $color_base08
+
+###################
+# Window properties
+###################
+
+# Border style for new windows
+new_window pixel 0
+new_float  pixel 2
+
+# Mouse does not dictate focus!
+focus_follows_mouse no
+
+######################
+# i3 bar configuration
+######################
+
+bar {
+    # position
+    position top
+
+    # i3pystatus is awesome!!
+   status_command $cmd_status $cmd_status_conf
+
+    # The actual colors
+    colors {
+        separator          $color_base03
+        background         $color_base00
+        statusline         $color_base05
+        focused_workspace  $color_base0D $color_base0D $color_base02
+        active_workspace   $color_base02 $color_base02 $color_base07
+        inactive_workspace $color_base00 $color_base00 $color_base04
+        urgent_workspace   $color_base08 $color_base08 $color_base07
+    }
+}

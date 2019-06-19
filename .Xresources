@@ -1,0 +1,10 @@
+!-------------------------------------------------------------------------------
+! Xresources main file
+!-------------------------------------------------------------------------------
+
+! General look and feel
+#include ".Xresources.d/base16"
+#include ".Xresources.d/font"
+
+! rofi settings
+#include ".Xresources.d/rofi"
