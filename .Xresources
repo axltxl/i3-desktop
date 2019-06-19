@@ -6,5 +6,8 @@
 #include ".Xresources.d/base16"
 #include ".Xresources.d/font"
 
+! i3wm
+#include ".Xresources.d/i3wm"
+
 ! rofi settings
 #include ".Xresources.d/rofi"

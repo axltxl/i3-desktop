@@ -36,3 +36,8 @@
 *color_base0D: #62d6e8
 *color_base0E: #b45bcf
 *color_base0F: #00f769
+
+#define FONT_BASE Inconsolata LGC
+
+*font: FONT_BASE
+*font_size: 11

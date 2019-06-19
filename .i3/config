@@ -3,7 +3,7 @@
 # i3wm base configuration variables
 ##################################
 
-## Base16 Dracula
+## Color scheme
 #################
 set_from_resource $color_base00 i3wm.color_base00
 set_from_resource $color_base01 i3wm.color_base01
@@ -31,8 +31,10 @@ set $key_mod2 Mod1
 set $key_mode_exit ctrl+bracketleft
 
 # Font-related variables
-set $font pango:Inconsolata LGC
-set $font_size 11
+# set $font pango:Inconsolata LGC
+# set $font_size 11
+set_from_resource $font      i3wm.font
+set_from_resource $font_size i3wm.font_size
 
 ## Commands
 ###########
