@@ -23,6 +23,7 @@ set_from_resource $color_base0E i3wm.color_base0E
 set_from_resource $color_base0F i3wm.color_base0F
 
 ## Modifier settings
+####################
 # One prefix to rule them all
 set $key_mod1 Mod4
 set $key_mod2 Mod1
@@ -30,18 +31,23 @@ set $key_mod2 Mod1
 # Default binding for escaping i3 "modes"
 set $key_mode_exit ctrl+bracketleft
 
+####################
+# Font configuration
+####################
+
 # Font-related variables
-# set $font pango:Inconsolata LGC
-# set $font_size 11
 set_from_resource $font      i3wm.font
-set_from_resource $font_size i3wm.font_size
+set               $font_size 10
+
+# Font for window titles.
+font $font $font_size
 
 ## Commands
 ###########
 
 # Screen brightness command
-set $cmd_backlight_up xbacklight -inc 2
-set $cmd_backlight_dn xbacklight -dec 2
+set $cmd_backlight_up xbacklight -inc 5
+set $cmd_backlight_dn xbacklight -dec 5
 
 # Multimedia commands
 set $cmd_audio_volup     "pactl set-sink-mute 0 0; pactl set-sink-volume @DEFAULT_SINK@ +5%"
@@ -88,10 +94,10 @@ set $cmd_app_launcher rofi -show drun
 set $cmd_window_switcher rofi -show window
 
 # workspaces
-set $ws1 "!"
-set $ws2 "@"
-set $ws3 "#"
-set $ws4 "%"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
 
 #################
 # i3 key mappings
@@ -99,7 +105,7 @@ set $ws4 "%"
 
 ## App launch shortcuts
 set $mode_app_launch \
-    "launch | [t]erm [e]ditor [l]auncher"
+    "launch | [t] term [e] editor [l] launcher"
 bindsym $key_mod1+a mode $mode_app_launch
 mode $mode_app_launch {
     # start a terminal
@@ -120,7 +126,7 @@ mode $mode_app_launch {
 
 # window mode
 set $mode_window \
-  "window | [m]ove [r]esize [t]erm [e]ditor [d]elete f[u]llsreen s[w]itch"
+  "window | [m] move [r] resize [t] term [e] editor [d] delete [u] fullsreen [w] switch [f] focus [l] layout"
 bindsym $key_mod1+w mode $mode_window
 mode $mode_window {
     # enter window-move mode
@@ -128,9 +134,6 @@ mode $mode_window {
 
     # enter window-resize mode
     bindsym r mode $mode_window_resize
-
-    # enter window-toggle mode
-    bindsym shift+t mode $mode_window_toggle
 
     # switch to terminal
     bindsym t [class=$term_class] focus; mode "default"
@@ -147,12 +150,18 @@ mode $mode_window {
     # switch window
     bindsym w exec $cmd_window_switcher; mode "default"
 
+    # window:layout mode
+    bindsym l mode $mode_window_layout
+
+    # window:focus mode
+    bindsym f mode $mode_window_focus
+
     # go back
     bindsym $key_mode_exit mode "default"
 }
 
-# window-move mode
-set $mode_window_move "window-move | [hjkl] move"
+# window:move mode
+set $mode_window_move "window:move | [hjkl] move [asdf] move to workspace"
 mode $mode_window_move {
     # move focused window
     bindsym h move left
@@ -171,19 +180,8 @@ mode $mode_window_move {
     bindsym $key_mode_exit mode "default"
 }
 
-# window-toggle mode
-set $mode_window_toggle "window-toggle | [s]plit"
-mode $mode_window_toggle {
-
-    # change container layout (stacked, tabbed, toggle split)
-    bindsym s layout toggle split
-
-    # go back
-    bindsym $key_mode_exit mode "default"
-}
-
-# window-resize mode
-set $mode_window_resize "window-resize | [hjkl] resize"
+# window:resize mode
+set $mode_window_resize "window:resize | [hjkl] resize"
 mode $mode_window_resize {
         # These bindings trigger as soon as you enter the resize mode
         bindsym h resize shrink width  48 px
@@ -196,18 +194,50 @@ mode $mode_window_resize {
         bindsym $key_mode_exit mode "default"
 }
 
-# change focus
+# window:focus mode
+set $mode_window_focus "window:focus | [h] left [j] down [k] up [l] right [p] parent [n] child"
+mode $mode_window_focus {
+    bindsym h focus left
+    bindsym j focus down
+    bindsym k focus up
+    bindsym l focus right
+    bindsym p focus parent
+    bindsym n focus child
+
+    # go back
+    bindsym Return mode "default"
+    bindsym $key_mode_exit mode "default"
+}
+
+# change focus (quick bindings)
 bindsym $key_mod1+h focus left
 bindsym $key_mod1+j focus down
 bindsym $key_mod1+k focus up
 bindsym $key_mod1+l focus right
+bindsym $key_mod1+p focus parent
+bindsym $key_mod1+n focus child
+
+# window:layout mode
+set $mode_window_layout "window:layout | [h] splith [v] splitv [t] tabbed [s] stacking"
+mode $mode_window_layout {
+
+    # Container orientation
+    bindsym t layout tabbed
+    bindsym s layout stacking
+    bindsym h layout splith
+    bindsym v layout splitv
+
+    # go back
+    bindsym Return mode "default"
+    bindsym $key_mode_exit mode "default"
+}
 
 # Desktop management
 ######################
-set $mode_i3 "i3 | [r]estart e[x]it [l]ock screen"
 
 # i3-mode
-bindsym $key_mod1+i mode $mode_i3
+set $mode_i3 "i3 | [r] restart i3wm [x] exit [l] lock screen"
+bindsym $key_mod1+d mode $mode_i3
 mode $mode_i3 {
     # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
     bindsym r exec "i3-msg restart"; mode "default"
@@ -219,16 +249,37 @@ mode $mode_i3 {
     bindsym l exec $autolock; mode "default"
 
     # go back
+    bindsym Return mode "default"
     bindsym $key_mode_exit mode "default"
 }
 
+# workspace management
+######################
 
-# switch to workspace
-# bindsym $key_mod1+a workspace $ws1
-bindsym $key_mod1+s workspace $ws2
-# bindsym $key_mod1+d workspace $ws3
-bindsym $key_mod1+f workspace $ws4
+set $mode_workspace "workspace | [space] goto"
+bindsym $key_mod1+space mode $mode_workspace
+mode $mode_workspace {
+    # workspace:goto mode
+    bindsym space mode $mode_workspace_goto
 
+    # go back
+    bindsym Return mode "default"
+    bindsym $key_mode_exit mode "default"
+}
+
+# go to workspace
+set $mode_workspace_goto "workspace:goto | [asdf]"
+mode $mode_workspace_goto {
+    # switch to workspace
+    bindsym a workspace $ws1
+    bindsym s workspace $ws2
+    bindsym d workspace $ws3
+    bindsym f workspace $ws4
+
+    # go back
+    bindsym Return mode "default"
+    bindsym $key_mode_exit mode "default"
+}
 
 # Multimedia keys
 #################
@@ -272,13 +323,6 @@ bindsym XF86MonBrightnessDown exec $cmd_backlight_dn
 # to their wanted position
 floating_modifier $key_mod1
 
-####################
-# Font configuration
-####################
-
-# Font for window titles.
-font $font $font_size
-
 ######################
 # Startup programs
 ######################
@@ -295,17 +339,17 @@ exec_always --no-startup-id nitrogen --restore
 # pulseaudio
 exec pulseaudio --start
 
-# dunst takes charge as the notification daemon
-# exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
-
 # keynav
 exec --no-startup-id keynav
+
+# redshift
+exec --no-startup-id redshift-gtk
 
 #########################
 # Window colors
 #########################
 
-client.focused          $color_base03 $color_base03 $color_base00 $color_base01
+client.focused          $color_base0C $color_base0C $color_base00 $color_base01
 client.focused_inactive $color_base02 $color_base02 $color_base03 $color_base01
 client.unfocused        $color_base01 $color_base01 $color_base03 $color_base01
 client.urgent           $color_base02 $color_base08 $color_base07 $color_base08
@@ -314,9 +358,12 @@ client.urgent           $color_base02 $color_base08 $color_base07 $color_base08
 # Window properties
 ###################
 
-# Border style for new windows
-new_window pixel 0
-new_float  pixel 2
+# Border style for windows
+title_align center
+hide_edge_borders both
+
+# default layout for workspaces
+workspace_layout tabbed
 
 # Mouse does not dictate focus!
 focus_follows_mouse no
@@ -334,12 +381,13 @@ bar {
 
     # The actual colors
     colors {
-        separator          $color_base03
+        separator          $color_base00
         background         $color_base00
         statusline         $color_base05
-        focused_workspace  $color_base0D $color_base0D $color_base02
+        focused_workspace  $color_base0E $color_base0E $color_base07
         active_workspace   $color_base02 $color_base02 $color_base07
-        inactive_workspace $color_base00 $color_base00 $color_base04
+        inactive_workspace $color_base00 $color_base00 $color_base02
         urgent_workspace   $color_base08 $color_base08 $color_base07
+        binding_mode       $color_base0C $color_base0C $color_base00
     }
 }

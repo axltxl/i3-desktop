@@ -9,3 +9,4 @@
     - =pulseaudio=
     - =keynav=
     - =rofi=
+    - =redshift=

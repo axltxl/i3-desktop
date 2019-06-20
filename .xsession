@@ -10,3 +10,6 @@ xmodmap ~/.Xmodmap
 
 # Set keyboard rates
 xset r rate 200 60
+
+# Finally, get i3 going
+exec i3
