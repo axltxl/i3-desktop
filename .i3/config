@@ -251,14 +251,11 @@ mode $mode_i3 {
 # workspace management
 ######################
 
-set $mode_workspace "workspace | [r] rename [s] switch [p] previous [n] next"
+set $mode_workspace "workspace | [s] switch [p] previous [n] next"
 bindsym $key_mod1+space mode $mode_workspace
 mode $mode_workspace {
     # workspace:switch mode
     bindsym s mode $mode_workspace_switch
-
-    # rename workspace
-    bindsym r exec i3-input -f $font -F 'rename workspace to "%s"' -P 'New name: '; mode "default"
 
     # switch to previous/next workspace
     bindsym p workspace prev; mode "default"
