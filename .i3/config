@@ -71,10 +71,6 @@ set $cmd_au_player_class Spotify
 set $cmd_wallpaper_manager nitrogen
 set $cmd_wallpaper_manager_class Nitrogen
 
-# sound manager
-set $cmd_au_manager       pavucontrol
-set $cmd_au_manager_class Pavucontrol
-
 # www browser
 set $browser       google-chrome
 set $browser_class chromium-browser
@@ -103,37 +99,22 @@ set $ws4 "4"
 # i3 key mappings
 #################
 
-## App launch shortcuts
-set $mode_app_launch \
-    "launch | [t] term [e] editor [l] launcher"
-bindsym $key_mod1+a mode $mode_app_launch
-mode $mode_app_launch {
-    # start a terminal
-    bindsym t exec $term; mode "default"
-
-    # start the editor
-    bindsym e exec $cmd_editor; mode "default"
-
-    # launch an app
-    bindsym l exec $cmd_app_launcher; mode "default"
-
-    # go back
-    bindsym $key_mode_exit mode "default"
-}
-
-## Window management
+## Container management
 ####################
 
-# window mode
-set $mode_window \
-  "window | [m] move [r] resize [t] term [e] editor [d] delete [u] fullsreen [w] switch [f] focus [l] layout"
-bindsym $key_mod1+w mode $mode_window
-mode $mode_window {
-    # enter window-move mode
-    bindsym m mode $mode_window_move
+# container mode
+set $mode_container \
+  "container | [m] move [r] resize [t] term [e] editor [d] delete [u] fullsreen [w] switch [f] focus [l] layout"
+bindsym $key_mod1+w mode $mode_container
+mode $mode_container {
+    # launch an app
+    bindsym n exec $cmd_app_launcher; mode "default"
 
-    # enter window-resize mode
-    bindsym r mode $mode_window_resize
+    # enter container:move mode
+    bindsym m mode $mode_container_move
+
+    # enter container:resize mode
+    bindsym r mode $mode_container_resize
 
     # switch to terminal
     bindsym t [class=$term_class] focus; mode "default"
@@ -141,48 +122,61 @@ mode $mode_window {
     # switch to editor
     bindsym e [class=$editor_class] focus; mode "default"
 
-    # kill focused window
+    # kill focused container
     bindsym d kill; mode "default"
 
     # enter fullscreen mode for the focused container
     bindsym u fullscreen; mode "default"
 
-    # switch window
+    # switch container
     bindsym w exec $cmd_window_switcher; mode "default"
 
-    # window:layout mode
-    bindsym l mode $mode_window_layout
+    # container:layout mode
+    bindsym l mode $mode_container_layout
 
-    # window:focus mode
-    bindsym f mode $mode_window_focus
+    # container:focus mode
+    bindsym f mode $mode_container_focus
 
     # go back
     bindsym $key_mode_exit mode "default"
 }
 
-# window:move mode
-set $mode_window_move "window:move | [hjkl] move [asdf] move to workspace"
-mode $mode_window_move {
-    # move focused window
+# container (quick bindings)
+bindsym $key_mod1+Tab exec $cmd_window_switcher
+
+# container:move mode
+set $mode_container_move "container:move | [hjkl] move [asdf] move to workspace"
+mode $mode_container_move {
+    # move focused container
     bindsym h move left
     bindsym j move down
     bindsym k move up
     bindsym l move right
 
     # move focused container to workspace
-    bindsym a move container to workspace $ws1; mode "default"
-    bindsym s move container to workspace $ws2; mode "default"
-    bindsym d move container to workspace $ws3; mode "default"
-    bindsym f move container to workspace $ws4; mode "default"
+    bindsym a move to workspace $ws1; mode "default"
+    bindsym s move to workspace $ws2; mode "default"
+    bindsym d move to workspace $ws3; mode "default"
+    bindsym f move to workspace $ws4; mode "default"
 
     # go back
     bindsym Return         mode "default"
     bindsym $key_mode_exit mode "default"
 }
 
-# window:resize mode
-set $mode_window_resize "window:resize | [hjkl] resize"
-mode $mode_window_resize {
+# container:move (quick bindings)
+bindsym $key_mod1+$key_mod2+h move left
+bindsym $key_mod1+$key_mod2+j move down
+bindsym $key_mod1+$key_mod2+k move up
+bindsym $key_mod1+$key_mod2+l move right
+bindsym $key_mod1$key_mod2+a move to workspace $ws1
+bindsym $key_mod1$key_mod2+s move to workspace $ws2
+bindsym $key_mod1$key_mod2+d move to workspace $ws3
+bindsym $key_mod1$key_mod2+f move to workspace $ws4
+
+# container:resize mode
+set $mode_container_resize "container:resize | [hjkl] resize"
+mode $mode_container_resize {
         # These bindings trigger as soon as you enter the resize mode
         bindsym h resize shrink width  48 px
         bindsym k resize grow height   48 px
@@ -194,9 +188,9 @@ mode $mode_window_resize {
         bindsym $key_mode_exit mode "default"
 }
 
-# window:focus mode
-set $mode_window_focus "window:focus | [h] left [j] down [k] up [l] right [p] parent [n] child"
-mode $mode_window_focus {
+# container:focus mode
+set $mode_container_focus "container:focus | [h] left [j] down [k] up [l] right [p] parent [n] child"
+mode $mode_container_focus {
     bindsym h focus left
     bindsym j focus down
     bindsym k focus up
@@ -209,7 +203,7 @@ mode $mode_window_focus {
     bindsym $key_mode_exit mode "default"
 }
 
-# change focus (quick bindings)
+# container:focus (quick bindings)
 bindsym $key_mod1+h focus left
 bindsym $key_mod1+j focus down
 bindsym $key_mod1+k focus up
@@ -217,18 +211,18 @@ bindsym $key_mod1+l focus right
 bindsym $key_mod1+p focus parent
 bindsym $key_mod1+n focus child
 
-# window:layout mode
-set $mode_window_layout "window:layout | [h] splith [v] splitv [t] tabbed [s] stacking"
-mode $mode_window_layout {
+# container:layout mode
+set $mode_container_layout "container:layout | [h] splith [v] splitv [t] tabbed [s] stacking"
+mode $mode_container_layout {
 
     # Container orientation
     bindsym t layout tabbed
     bindsym s layout stacking
-    bindsym h layout splith
-    bindsym v layout splitv
+    bindsym v layout splith
+    bindsym h layout splitv
 
     # go back
-    bindsym Return mode "default"
+    bindsym Return         mode "default"
     bindsym $key_mode_exit mode "default"
 }
 
@@ -237,39 +231,42 @@ mode $mode_window_layout {
 
 # i3-mode
 set $mode_i3 "i3 | [r] restart i3wm [x] exit [l] lock screen"
-bindsym $key_mod1+d mode $mode_i3
+bindsym $key_mod1+q mode $mode_i3
 mode $mode_i3 {
     # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
     bindsym r exec "i3-msg restart"; mode "default"
 
     # exit i3 (logs you out of your X session)
-    bindsym x exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+    bindsym x exec "i3-nagbar -f $font -t warning -m 'Do you really want to exit i3?' -b 'Yes' 'i3-msg exit'"; mode "default"
 
     # lock the screen
     bindsym l exec $autolock; mode "default"
 
     # go back
-    bindsym Return mode "default"
+    bindsym Return         mode "default"
     bindsym $key_mode_exit mode "default"
 }
 
 # workspace management
 ######################
 
-set $mode_workspace "workspace | [space] goto"
+set $mode_workspace "workspace | [r] rename [s] switch"
 bindsym $key_mod1+space mode $mode_workspace
 mode $mode_workspace {
-    # workspace:goto mode
-    bindsym space mode $mode_workspace_goto
+    # workspace:switch mode
+    bindsym s mode $mode_workspace_switch
+
+    # rename workspace
+    bindsym r exec i3-input -f $font -F 'rename workspace to "%s"' -P 'New name: '; mode "default"
 
     # go back
     bindsym Return mode "default"
     bindsym $key_mode_exit mode "default"
 }
 
-# go to workspace
-set $mode_workspace_goto "workspace:goto | [asdf]"
-mode $mode_workspace_goto {
+# workspace:switch mode
+set $mode_workspace_switch "workspace:switch | [asdf]"
+mode $mode_workspace_switch {
     # switch to workspace
     bindsym a workspace $ws1
     bindsym s workspace $ws2
@@ -277,34 +274,41 @@ mode $mode_workspace_goto {
     bindsym f workspace $ws4
 
     # go back
-    bindsym Return mode "default"
+    bindsym Return         mode "default"
     bindsym $key_mode_exit mode "default"
 }
+
+# workspace:switch (quick bindings)
+bindsym $key_mod1+a workspace $ws1
+bindsym $key_mod1+s workspace $ws2
+bindsym $key_mod1+d workspace $ws3
+bindsym $key_mod1+f workspace $ws4
+
 
 # Multimedia keys
 #################
 
 # raise volume
-bindsym XF86AudioRaiseVolume       exec $cmd_audio_volup
-bindsym $key_mod1+$key_mod2+comma  exec $cmd_audio_volup
+bindsym XF86AudioRaiseVolume              exec $cmd_audio_volup
+bindsym $key_mod1+$key_mod2+bracketright  exec $cmd_audio_volup
 
 # lower volume
-bindsym XF86AudioLowerVolume       exec $cmd_audio_voldown
-bindsym $key_mod1+$key_mod2+m      exec $cmd_audio_voldown
+bindsym XF86AudioLowerVolume              exec $cmd_audio_voldown
+bindsym $key_mod1+$key_mod2+bracketleft   exec $cmd_audio_voldown
 
 # mute sound
-bindsym XF86AudioMute              exec $cmd_audio_volmute
+bindsym XF86AudioMute                     exec $cmd_audio_volmute
 
 # Media player controls
-bindsym XF86AudioPlay              exec $cmd_audio_playpause
-bindsym $key_mod1+$key_mod2+space  exec $cmd_audio_playpause
+bindsym XF86AudioPlay                     exec $cmd_audio_playpause
+bindsym $key_mod1+$key_mod2+space         exec $cmd_audio_playpause
 
 # Previous/next track
-bindsym XF86AudioNext              exec $cmd_audio_next
-bindsym $key_mod1+$key_mod2+slash  exec $cmd_audio_next
+bindsym XF86AudioNext                     exec $cmd_audio_next
+bindsym $key_mod1+$key_mod2+p             exec $cmd_audio_next
 
-bindsym XF86AudioPrev              exec $cmd_audio_prev
-bindsym $key_mod1+$key_mod2+period exec $cmd_audio_prev
+bindsym XF86AudioPrev                     exec $cmd_audio_prev
+bindsym $key_mod1+$key_mod2+n             exec $cmd_audio_prev
 
 # Screen brightness controls
 ############################
@@ -349,10 +353,10 @@ exec --no-startup-id redshift-gtk
 # Window colors
 #########################
 
-client.focused          $color_base0C $color_base0C $color_base00 $color_base01
-client.focused_inactive $color_base02 $color_base02 $color_base03 $color_base01
-client.unfocused        $color_base01 $color_base01 $color_base03 $color_base01
-client.urgent           $color_base02 $color_base08 $color_base07 $color_base08
+client.focused          $color_base0E $color_base0E $color_base07 $color_base0C
+client.focused_inactive $color_base03 $color_base03 $color_base00 $color_base05
+client.unfocused        $color_base01 $color_base01 $color_base03 $color_base03
+client.urgent           $color_base08 $color_base08 $color_base07 $color_base0C
 
 ###################
 # Window properties
@@ -360,7 +364,13 @@ client.urgent           $color_base02 $color_base08 $color_base07 $color_base08
 
 # Border style for windows
 title_align center
-hide_edge_borders both
+
+# Window borders
+default_border pixel 1
+
+#######################
+# Workspaces properties
+#######################
 
 # default layout for workspaces
 workspace_layout tabbed
