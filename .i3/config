@@ -305,10 +305,10 @@ bindsym $key_mod1+$key_mod2+space         exec $cmd_audio_playpause
 
 # Previous/next track
 bindsym XF86AudioNext                     exec $cmd_audio_next
-bindsym $key_mod1+$key_mod2+p             exec $cmd_audio_next
+bindsym $key_mod1+$key_mod2+n             exec $cmd_audio_next
 
 bindsym XF86AudioPrev                     exec $cmd_audio_prev
-bindsym $key_mod1+$key_mod2+n             exec $cmd_audio_prev
+bindsym $key_mod1+$key_mod2+p             exec $cmd_audio_prev
 
 # Screen brightness controls
 ############################
