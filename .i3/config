@@ -233,6 +233,7 @@ mode $mode_container_layout {
 set $mode_i3 "i3 | [r] restart i3wm [x] exit [l] lock screen"
 bindsym $key_mod1+q mode $mode_i3
 mode $mode_i3 {
+
     # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
     bindsym r exec "i3-msg restart"; mode "default"
 
@@ -250,7 +251,7 @@ mode $mode_i3 {
 # workspace management
 ######################
 
-set $mode_workspace "workspace | [r] rename [s] switch"
+set $mode_workspace "workspace | [r] rename [s] switch [p] previous [n] next"
 bindsym $key_mod1+space mode $mode_workspace
 mode $mode_workspace {
     # workspace:switch mode
@@ -258,6 +259,10 @@ mode $mode_workspace {
 
     # rename workspace
     bindsym r exec i3-input -f $font -F 'rename workspace to "%s"' -P 'New name: '; mode "default"
+
+    # switch to previous/next workspace
+    bindsym p workspace prev; mode "default"
+    bindsym n workspace next; mode "default"
 
     # go back
     bindsym Return mode "default"
@@ -283,6 +288,9 @@ bindsym $key_mod1+a workspace $ws1
 bindsym $key_mod1+s workspace $ws2
 bindsym $key_mod1+d workspace $ws3
 bindsym $key_mod1+f workspace $ws4
+
+# quickly switch between last two workspaces
+bindsym $key_mod1+$key_mod2+Tab workspace back_and_forth
 
 
 # Multimedia keys
