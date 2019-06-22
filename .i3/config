@@ -36,8 +36,8 @@ set $key_mode_exit ctrl+bracketleft
 ####################
 
 # Font-related variables
-set_from_resource $font      i3wm.font
-set               $font_size 10
+set_from_resource $font      i3wm.font.face
+set_from_resource $font_size i3wm.font.size
 
 # Font for window titles.
 font $font $font_size
@@ -46,48 +46,49 @@ font $font $font_size
 ###########
 
 # Screen brightness command
-set $cmd_backlight_up xbacklight -inc 5
-set $cmd_backlight_dn xbacklight -dec 5
+set_from_resource $cmd_backlight_up            i3wm.cmd.backlight.up
+set_from_resource $cmd_backlight_dn            i3wm.cmd.backlight.down
 
 # Multimedia commands
-set $cmd_audio_volup     "pactl set-sink-mute 0 0; pactl set-sink-volume @DEFAULT_SINK@ +5%"
-set $cmd_audio_voldown   "pactl set-sink-volume @DEFAULT_SINK@ -5%"
-set $cmd_audio_volmute   "pactl set-sink-mute 0 1"
-set $cmd_audio_playpause "playerctl play-pause"
-set $cmd_audio_next      "playerctl next"
-set $cmd_audio_prev      "playerctl previous"
+set_from_resource $cmd_audio_volup             i3wm.cmd.audio.volup
+set_from_resource $cmd_audio_voldown           i3wm.cmd.audio.voldown
+set_from_resource $cmd_audio_volmute           i3wm.cmd.audio.volmute
+set_from_resource $cmd_audio_playpause         i3wm.cmd.audio.playpause
+set_from_resource $cmd_audio_next              i3wm.cmd.audio.next
+set_from_resource $cmd_audio_prev              i3wm.cmd.audio.prev
 
 # Text editor
-set $cmd_editor emacs
+set_from_resource $cmd_editor                  i3wm.cmd.editor
+set_from_resource $cmd_editor_class            i3wm.cmd.editor.win_class
 
 # i3lock wrapper
-set $autolock i3lock
+set_from_resource $autolock                    i3wm.cmd.lock
 
 # music player
-set $cmd_au_player spotify
-set $cmd_au_player_class Spotify
+set_from_resource $cmd_au_player               i3wm.cmd.audio.player
+set_from_resource $cmd_au_player_class         i3wm.cmd.audio.player.win_class
 
 # wallpaper manager
-set $cmd_wallpaper_manager nitrogen
-set $cmd_wallpaper_manager_class Nitrogen
+set_from_resource $cmd_wallpaper_manager       i3wm.cmd.wpmgr
+set_from_resource $cmd_wallpaper_manager_class i3wm.cmd.wpmgr.win_class
 
 # www browser
-set $browser       google-chrome
-set $browser_class chromium-browser
+set_from_resource $browser                     i3wm.cmd.browser
+set_from_resource $browser_class               i3wm.cmd.browser.win_class
 
 # terminal of choice
-set $term hyper
-set $term_class Hyper
+set_from_resource $term                        i3wm.cmd.term
+set_from_resource $term_class                  i3wm.cmd.term.win_class
 
 # i3pystatus
-set $cmd_status      ~/.i3/pystatus/bin/python3
-set $cmd_status_conf ~/.i3/status.py
+set_from_resource $cmd_status                  i3wm.cmd.status
+set_from_resource $cmd_status_conf             i3wm.cmd.status.conf
 
 # app launcher
-set $cmd_app_launcher rofi -show drun
+set_from_resource $cmd_app_launcher            i3wm.cmd.launcher
 
 # window switcher
-set $cmd_window_switcher rofi -show window
+set_from_resource $cmd_window_switcher         i3wm.cmd.window_switcher
 
 # workspaces
 set $ws1 "1"
