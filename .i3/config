@@ -231,7 +231,7 @@ mode $mode_container_layout {
 ######################
 
 # i3-mode
-set $mode_i3 "i3 | [r] restart i3wm [x] exit [l] lock screen"
+set $mode_i3 "i3 | [r] restart i3 [x] exit [l] lock screen"
 bindsym $key_mod1+q mode $mode_i3
 mode $mode_i3 {
 
@@ -239,12 +239,25 @@ mode $mode_i3 {
     bindsym r exec i3-restart; mode "default"
 
     # exit i3 (logs you out of your X session)
-    bindsym x exec "i3-nagbar -f $font -t warning -m 'Do you really want to exit i3?' -b 'Yes' 'i3-msg exit'"; mode "default"
+    bindsym x mode $mode_i3_exit
 
     # lock the screen
     bindsym l exec $autolock; mode "default"
 
     # go back
+    bindsym Return         mode "default"
+    bindsym $key_mode_exit mode "default"
+}
+
+# i3:exit mode
+set $mode_i3_exit "Exit i3? [y/n]"
+mode $mode_i3_exit {
+
+    # exit i3 (logs you out of your X session)
+    bindsym y exec i3-msg exit
+
+    # go back
+    bindsym n              mode "default"
     bindsym Return         mode "default"
     bindsym $key_mode_exit mode "default"
 }
