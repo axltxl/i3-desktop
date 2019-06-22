@@ -1,0 +1,3 @@
+
+# i3-specific scripts are added to PATH
+PATH=~/.i3/bin:$PATH

@@ -118,10 +118,10 @@ mode $mode_container {
     bindsym r mode $mode_container_resize
 
     # switch to terminal
-    bindsym t [class=$term_class] focus; mode "default"
+    bindsym t exec i3-run $term $term_class; mode "default"
 
     # switch to editor
-    bindsym e [class=$editor_class] focus; mode "default"
+    bindsym e exec i3-run $cmd_editor $cmd_editor_class; mode "default"
 
     # kill focused container
     bindsym d kill; mode "default"
@@ -236,7 +236,7 @@ bindsym $key_mod1+q mode $mode_i3
 mode $mode_i3 {
 
     # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-    bindsym r exec "i3-msg restart"; mode "default"
+    bindsym r exec i3-restart; mode "default"
 
     # exit i3 (logs you out of your X session)
     bindsym x exec "i3-nagbar -f $font -t warning -m 'Do you really want to exit i3?' -b 'Yes' 'i3-msg exit'"; mode "default"

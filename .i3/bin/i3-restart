@@ -1,0 +1,8 @@
+#!/bin/sh
+# Restart i3wm
+
+# Reload Xresources database
+xrdb -merge ~/.Xresources
+
+# restart i3
+exec i3-msg restart
