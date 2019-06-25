@@ -15,6 +15,7 @@ packages=( stow
            xclip
            xbacklight
            xautolock
+           xsettingsd
            xfonts-terminus
            compton
            rofi
