@@ -50,3 +50,4 @@ scripts/pkg add i3
 scripts/pkg add dunst
 scripts/pkg add compton
 scripts/pkg add urxvt
+scripts/pkg add theme
