@@ -1,0 +1,9 @@
+#!/bin/bash
+# Start pulseaudio server
+set -x
+
+# pulseaudio --check && pulseaudio --kill
+pulseaudio --kill
+if ! pulseaudio --daemonize -v; then
+    notify-send -u critical pulseaudio "<b>pulseaudio</b> failed to start"
+fi

@@ -1,0 +1,31 @@
+#!/bin/bash
+# Usage: pkg (add|rm) <directory>
+set -e
+
+# Absolute path to this script
+project_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
+
+__pkg_add () {
+    local pkg_name=$1
+    if [[ -d "$pkg_name" ]]; then
+        set -x; stow --verbose=1 -S -t $HOME -d $project_dir $pkg_name; set +x
+    fi
+}
+
+__pkg_rm () {
+    local pkg_name=$1
+    if [[ -d "$pkg_name" ]]; then
+        set -x; stow --verbose=1 -D -t $HOME -d $project_dir $pkg_name; set +x
+    fi
+}
+
+case $1 in
+    add)
+        __pkg_add ${@:2}
+        ;;
+    rm)
+        __pkg_rm ${@:2}
+        ;;
+    *) echo "Usage: pkg (add|rm) <pkg>"; exit 1
+       ;;
+esac

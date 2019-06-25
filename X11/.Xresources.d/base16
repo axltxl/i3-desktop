@@ -13,31 +13,26 @@
 #define base07 #f7f7fb
 #define base08 #ea51b2
 #define base09 #b45bcf
-#define base0A #00f769
-#define base0B #ebff87
+#define base0A #ebff87
+#define base0B #00f769
 #define base0C #a1efe4
 #define base0D #62d6e8
 #define base0E #b45bcf
 #define base0F #00f769
 
-*color_base00: #282936
-*color_base01: #3a3c4e
-*color_base02: #4d4f68
-*color_base03: #626483
-*color_base04: #62d6e8
-*color_base05: #e9e9f4
-*color_base06: #f1f2f8
-*color_base07: #f7f7fb
-*color_base08: #ea51b2
-*color_base09: #b45bcf
-*color_base0A: #00f769
-*color_base0B: #ebff87
-*color_base0C: #a1efe4
-*color_base0D: #62d6e8
-*color_base0E: #b45bcf
-*color_base0F: #00f769
-
-#define FONT_BASE Inconsolata LGC
-
-*font: FONT_BASE
-*font_size: 11
+*color_base00: base00
+*color_base01: base01
+*color_base02: base02
+*color_base03: base03
+*color_base04: base04
+*color_base05: base05
+*color_base06: base06
+*color_base07: base07
+*color_base08: base08
+*color_base09: base09
+*color_base0A: base0A
+*color_base0B: base0B
+*color_base0C: base0C
+*color_base0D: base0D
+*color_base0E: base0E
+*color_base0F: base0F

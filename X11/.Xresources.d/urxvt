@@ -1,0 +1,86 @@
+!-------------------------------------------------------------------------------
+! urxvt settings
+!-------------------------------------------------------------------------------
+
+!Essentials
+!-------------------------------------------------------------------------------
+URxvt*loginShell: true
+URxvt*saveLines:  0
+
+! Fonts
+!-------------------------------------------------------------------------------
+URxvt.font: xft:terminus:pixelsize=14
+!URxvt.letterSpace: -1
+
+! Scrollbar
+!-------------------------------------------------------------------------------
+URxvt.scrollStyle:          rxvt
+URxvt.scrollBar:            false
+
+! Cursor
+!-------------------------------------------------------------------------------
+URxvt.cursorBlink:          true
+URxvt.cursorColor:          base0E
+URxvt.cursorUnderline:      false
+
+! Perl extensions
+!-------------------------------------------------------------------------------
+URxvt.perl-ext-common:      default,matcher,clipboard,fullscreen
+URxvt.matcher.button:       1
+URxvt.urlLauncher:          google-chrome
+
+!enable copy/paste using Ctrl+Shift+c/Ctrl+Shift+v
+!-------------------------------------------------------------------------------
+URxvt.iso14755: False
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.clipboard.copycmd:  xsel -ib
+URxvt.clipboard.pastecmd: xsel -ob
+
+! 32-bit as color depth
+!-------------------------------------------------------------------------------
+URxvt.depth: 32
+
+!-------------------------------------------------------------------------------
+! with this set to true, when an app sends a bell to the terminal,
+! awesome hilights the appropriate tag(s) ;)
+!-------------------------------------------------------------------------------
+URxvt*urgentOnBell: true
+
+
+! Color scheme
+!-------------------------------------------------------------------------------
+URxvt.foreground: base07
+URxvt.background: base00
+
+!black
+URxvt.color0:     base00
+URxvt.color8:     base03
+
+!red
+URxvt.color1:     base08
+URxvt.color9:     base08
+
+!green
+URxvt.color2:     base0B
+URxvt.color10:    base0B
+
+!brownyellow
+URxvt.color3:     base0A
+URxvt.color11:    base0A
+
+!blue
+URxvt.color4:     base0D
+URxvt.color12:    base0D
+
+!magenta
+URxvt.color5:     base0E
+URxvt.color13:    base0E
+
+!cyan
+URxvt.color6:     base0C
+URxvt.color14:    base0C
+
+!white
+URxvt.color7:     base07
+URxvt.color15:    base07

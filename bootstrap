@@ -1,0 +1,52 @@
+#!/bin/bash
+# Setup i3wm configuration
+# FIXME: document me
+set -e
+
+# Absolute path to this script
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+packages=( stow
+           i3
+           i3lock-fancy
+           xinit
+           x11-xserver-utils
+           xsel
+           xclip
+           xbacklight
+           xautolock
+           xfonts-terminus
+           compton
+           rofi
+           rxvt-unicode
+           nitrogen
+           playerctl
+           python3-venv
+           build-essential
+           libpython3-dev
+           libiw-dev
+           libdbus-1-dev
+           libglib2.0-dev
+         )
+
+
+# Install packages
+sudo apt-get update
+sudo apt-get -y install ${packages[@]}
+
+# python venv
+I3_VENV=~/.i3pyvenv
+
+[[ -a "$I3_VENV" ]] && rm -rf $I3_VENV
+mkdir $I3_VENV
+python3 -m venv $I3_VENV
+. $I3_VENV/bin/activate
+pip3 install -r ${script_dir}/requirements.txt
+
+# Stow directories
+cd $script_dir
+scripts/pkg add X11
+scripts/pkg add i3
+scripts/pkg add dunst
+scripts/pkg add compton
+scripts/pkg add urxvt

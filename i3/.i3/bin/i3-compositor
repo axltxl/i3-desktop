@@ -1,0 +1,7 @@
+#!/bin/bash
+# Reload compton configuration
+
+killall -9 compton
+if ! compton -b; then
+    notify-send -u critical compton "failed to restart"
+fi

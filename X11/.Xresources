@@ -11,3 +11,6 @@
 
 ! rofi settings
 #include ".Xresources.d/rofi"
+
+! urxvt settings
+#include ".Xresources.d/urxvt"

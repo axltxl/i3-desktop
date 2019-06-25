@@ -3,3 +3,4 @@ psutil     ~= 5.6
 netifaces
 colour
 basiciw
+dbus-python

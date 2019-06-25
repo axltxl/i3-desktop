@@ -1,0 +1,24 @@
+Net/CursorBlink 1
+Net/CursorBlinkTime 1200
+Net/DndDragThreshold 8
+Net/DoubleClickTime 400
+Net/DoubleClickDistance 5
+Net/IconThemeName "Paper"
+Net/ThemeName "Ant-Dracula"
+Xft/Antialias 1
+Xft/DPI 98304
+Xft/Hinting 1
+Xft/HintStyle "hintslight"
+Xft/RGBA "none"
+Gtk/ButtonImages 0
+Gtk/CanChangeAccels 0
+Gtk/ColorPalette "black:white:gray50:red:purple:blue:light blue:green:yellow:orange:lavender:brown:goldenrod4:dodger blue:pink:light green:gray10:gray30:gray75:gray90"
+Gtk/FontName "Terminus 10"
+Gtk/IMPreeditStyle "callback"
+Gtk/IMStatusStyle "callback"
+Gtk/MenuBarAccel "F10"
+Gtk/MenuImages 0
+Gtk/ToolbarIconSize "large"
+Gtk/ToolbarStyle "both-horiz"
+Gtk/CursorThemeName "Paper"
+Gtk/CursorThemeSize 24

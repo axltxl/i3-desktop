@@ -1,0 +1,7 @@
+#!/bin/bash
+# Restart keynav
+
+killall -9 keynav
+if ! keynav; then
+    notify-send -u critical keynav "failed to start"
+fi

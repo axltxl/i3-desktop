@@ -1,0 +1,14 @@
+#!/bin/bash
+# Reload xsettings
+
+# run xsettings if not running
+if ! `pgrep xsettingsd`; then
+    exec xsettingsd
+fi
+
+# At startup, xsettingsd reads its configuration from $HOME/.xsettingsd by default.
+# If it encounters any errors, it exits; otherwise it becomes the XSETTINGS manager on all screens.
+# After modifying the .xsettingsd file, you can trigger a configuration reload by sending a
+# HUP signal to xsettingsd, e.g. killall -HUP xsettingsd
+# Source: https://github.com/derat/xsettingsd/wiki/Installation
+killall -HUP xsettingsd

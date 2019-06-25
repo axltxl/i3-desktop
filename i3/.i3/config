@@ -22,6 +22,15 @@ set_from_resource $color_base0D i3wm.color_base0D
 set_from_resource $color_base0E i3wm.color_base0E
 set_from_resource $color_base0F i3wm.color_base0F
 
+# X11 basic settings
+####################
+
+# Set keyboard mappings
+exec xmodmap ~/.Xmodmap
+
+# Set keyboard rates
+exec xset r rate 200 60
+
 ## Modifier settings
 ####################
 # One prefix to rule them all
@@ -58,11 +67,11 @@ set_from_resource $cmd_audio_next              i3wm.cmd.audio.next
 set_from_resource $cmd_audio_prev              i3wm.cmd.audio.prev
 
 # Text editor
-set_from_resource $cmd_editor                  i3wm.cmd.editor
+set_from_resource $cmd_editor                  i3wm.cmd.editor i3-sensible-editor
 set_from_resource $cmd_editor_class            i3wm.cmd.editor.win_class
 
 # i3lock wrapper
-set_from_resource $autolock                    i3wm.cmd.lock
+set_from_resource $autolock                    i3wm.cmd.lock i3lock
 
 # music player
 set_from_resource $cmd_au_player               i3wm.cmd.audio.player
@@ -77,7 +86,7 @@ set_from_resource $browser                     i3wm.cmd.browser
 set_from_resource $browser_class               i3wm.cmd.browser.win_class
 
 # terminal of choice
-set_from_resource $term                        i3wm.cmd.term
+set_from_resource $term                        i3wm.cmd.term i3-sensible-terminal
 set_from_resource $term_class                  i3wm.cmd.term.win_class
 
 # i3pystatus
@@ -104,10 +113,9 @@ set $ws4 "4"
 ####################
 
 # container mode
-set $mode_container \
-  "container | [m] move [r] resize [t] term [e] editor [d] delete [u] fullsreen [w] switch [f] focus [l] layout"
+set_from_resource $mode_container i3wm.mode.container
 bindsym $key_mod1+w mode $mode_container
-mode $mode_container {
+mode --pango_markup $mode_container {
     # launch an app
     bindsym n exec $cmd_app_launcher; mode "default"
 
@@ -146,8 +154,8 @@ mode $mode_container {
 bindsym $key_mod1+Tab exec $cmd_window_switcher
 
 # container:move mode
-set $mode_container_move "container:move | [hjkl] move [asdf] move to workspace"
-mode $mode_container_move {
+set_from_resource $mode_container_move i3wm.mode.container.move
+mode --pango_markup $mode_container_move {
     # move focused container
     bindsym h move left
     bindsym j move down
@@ -176,8 +184,8 @@ bindsym $key_mod1$key_mod2+d move to workspace $ws3
 bindsym $key_mod1$key_mod2+f move to workspace $ws4
 
 # container:resize mode
-set $mode_container_resize "container:resize | [hjkl] resize"
-mode $mode_container_resize {
+set_from_resource $mode_container_resize i3wm.mode.container.resize
+mode --pango_markup $mode_container_resize {
         # These bindings trigger as soon as you enter the resize mode
         bindsym h resize shrink width  48 px
         bindsym k resize grow height   48 px
@@ -190,8 +198,8 @@ mode $mode_container_resize {
 }
 
 # container:focus mode
-set $mode_container_focus "container:focus | [h] left [j] down [k] up [l] right [p] parent [n] child"
-mode $mode_container_focus {
+set_from_resource $mode_container_focus i3wm.mode.container.focus
+mode --pango_markup $mode_container_focus {
     bindsym h focus left
     bindsym j focus down
     bindsym k focus up
@@ -213,8 +221,8 @@ bindsym $key_mod1+p focus parent
 bindsym $key_mod1+n focus child
 
 # container:layout mode
-set $mode_container_layout "container:layout | [h] splith [v] splitv [t] tabbed [s] stacking"
-mode $mode_container_layout {
+set_from_resource $mode_container_layout i3wm.mode.container.layout
+mode --pango_markup $mode_container_layout {
 
     # Container orientation
     bindsym t layout tabbed
@@ -230,13 +238,13 @@ mode $mode_container_layout {
 # Desktop management
 ######################
 
-# i3-mode
-set $mode_i3 "i3 | [r] restart i3 [x] exit [l] lock screen"
+# i3:restart mode
+set_from_resource $mode_i3 i3wm.mode.desktop
 bindsym $key_mod1+q mode $mode_i3
-mode $mode_i3 {
+mode --pango_markup $mode_i3 {
 
-    # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-    bindsym r exec i3-restart; mode "default"
+    # enter i3:restart mode
+    bindsym r mode $mode_i3_restart
 
     # exit i3 (logs you out of your X session)
     bindsym x mode $mode_i3_exit
@@ -244,14 +252,48 @@ mode $mode_i3 {
     # lock the screen
     bindsym l exec $autolock; mode "default"
 
+    # go bacr
+    bindsym Return         mode "default"
+    bindsym $key_mode_exit mode "default"
+}
+
+# i3:restart (quick bindings)
+bindsym $key_mod1+shift+r exec i3-restart
+
+
+# i3:restart mode
+set_from_resource $mode_i3_restart i3wm.mode.desktop.restart
+mode --pango_markup $mode_i3_restart {
+
+    # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+    bindsym i exec i3-restart; mode "default"
+
+    # restart window compositor
+    bindsym c exec i3-compositor; mode "default"
+
+    # reload xrandr settings
+    bindsym x exec i3-xrandr; mode "default"
+
+    # keynav
+    bindsym k exec i3-keynav; mode "default"
+
+    # audio server
+    bindsym a exec i3-audio; mode "default"
+
+    # set up wallpaper
+    bindsym w exec i3-wallpaper; mode "default"
+
+    # xsettingsd (look-and-feel)
+    bindsym l exec i3-xsettingsd-reload; mode "default"
+
     # go back
     bindsym Return         mode "default"
     bindsym $key_mode_exit mode "default"
 }
 
 # i3:exit mode
-set $mode_i3_exit "Exit i3? [y/n]"
-mode $mode_i3_exit {
+set_from_resource $mode_i3_exit i3wm.mode.desktop.exit
+mode --pango_markup $mode_i3_exit {
 
     # exit i3 (logs you out of your X session)
     bindsym y exec i3-msg exit
@@ -265,9 +307,9 @@ mode $mode_i3_exit {
 # workspace management
 ######################
 
-set $mode_workspace "workspace | [s] switch [p] previous [n] next"
+set_from_resource $mode_workspace i3wm.mode.workspace
 bindsym $key_mod1+space mode $mode_workspace
-mode $mode_workspace {
+mode --pango_markup $mode_workspace {
     # workspace:switch mode
     bindsym s mode $mode_workspace_switch
 
@@ -281,8 +323,8 @@ mode $mode_workspace {
 }
 
 # workspace:switch mode
-set $mode_workspace_switch "workspace:switch | [asdf]"
-mode $mode_workspace_switch {
+set_from_resource $mode_workspace_switch i3wm.mode.workspace.switch
+mode --pango_markup $mode_workspace_switch {
     # switch to workspace
     bindsym a workspace $ws1
     bindsym s workspace $ws2
@@ -317,6 +359,7 @@ bindsym $key_mod1+$key_mod2+bracketleft   exec $cmd_audio_voldown
 
 # mute sound
 bindsym XF86AudioMute                     exec $cmd_audio_volmute
+bindsym $key_mod1+$key_mod2+m             exec $cmd_audio_volmute
 
 # Media player controls
 bindsym XF86AudioPlay                     exec $cmd_audio_playpause
@@ -350,23 +393,39 @@ floating_modifier $key_mod1
 # Startup programs
 ######################
 
+# xsettingsd
+exec --no-startup-id xsettingsd
+
+# window compositor
+exec --no-startup-id i3-compositor
+
 # NetworkManager
-exec nm-applet
+exec --no-startup-id nm-applet
 
 # xautolock
 exec --no-startup-id xautolock -time 8 -locker $autolock
 
+# set up screens
+exec --no-startup-id i3-xrandr
+
 # set wallpapers
-exec_always --no-startup-id nitrogen --restore
+exec --no-startup-id i3-wallpaper
 
 # pulseaudio
 exec pulseaudio --start
+exec pasystray
 
 # keynav
-exec --no-startup-id keynav
+exec --no-startup-id i3-keynav
 
 # redshift
 exec --no-startup-id redshift-gtk
+
+# dunst (notifications)
+exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
+
+# blueman applet (bluetooth)
+exec blueman-applet
 
 #########################
 # Window colors
@@ -405,8 +464,11 @@ bar {
     # position
     position top
 
+    # tray should only show on the primary monitor
+    tray_output primary
+
     # i3pystatus is awesome!!
-   status_command $cmd_status $cmd_status_conf
+    status_command $cmd_status $cmd_status_conf
 
     # The actual colors
     colors {
@@ -416,7 +478,7 @@ bar {
         focused_workspace  $color_base0E $color_base0E $color_base07
         active_workspace   $color_base02 $color_base02 $color_base07
         inactive_workspace $color_base00 $color_base00 $color_base02
-        urgent_workspace   $color_base08 $color_base08 $color_base07
-        binding_mode       $color_base0C $color_base0C $color_base00
+        urgent_workspace   $color_base0A $color_base0A $color_base01
+        binding_mode       $color_base0C $color_base0C $color_base01
     }
 }

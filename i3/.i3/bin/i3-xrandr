@@ -1,0 +1,9 @@
+#!/bin/bash
+# Load xrandr settings for multiple monitors
+# xrandr settings are expected at ~/.xrandr
+
+xrandr_file=~/.xrandr
+[[ -f "$xrandr_file" ]] && . $xrandr_file
+
+# Restore wallpapers
+exec i3-wallpaper

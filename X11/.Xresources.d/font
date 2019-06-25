@@ -2,4 +2,7 @@
 ! font settings
 !-------------------------------------------------------------------------------
 
-#define FONT_BASE Inconsolata LGC
+#define FONT_BASE Terminus
+
+*font: FONT_BASE
+*font_size: 11

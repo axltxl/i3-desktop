@@ -1,7 +1,7 @@
 * My i3wm configuration [WIP]
 ** Requirements:
+
     - =xbacklight=
-    - =i3wm=
     - =playerctl=
     - =xautolock=
     - =blueman= (for Bluetooth)
@@ -10,3 +10,16 @@
     - =keynav=
     - =rofi=
     - =redshift=
+    - =compton=
+    - =pasystray=
+    - =blueman=
+    - =urxvt=
+    - =xsel=
+    - =xclip=
+    - =i3lock-fancy=
+    - =nitrogen=
+
+base16 scheme: dracula
+Icon theme: paper
+Cursor theme: paper
+GTK theme: Ant-Dracula
