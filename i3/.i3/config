@@ -134,9 +134,6 @@ mode --pango_markup $mode_container {
     # kill focused container
     bindsym d kill; mode "default"
 
-    # enter fullscreen mode for the focused container
-    bindsym u fullscreen; mode "default"
-
     # switch container
     bindsym w exec $cmd_window_switcher; mode "default"
 
@@ -145,6 +142,9 @@ mode --pango_markup $mode_container {
 
     # container:focus mode
     bindsym f mode $mode_container_focus
+
+    # container:toggle mode
+    bindsym shift+t mode $mode_container_toggle
 
     # go back
     bindsym $key_mode_exit mode "default"
@@ -197,9 +197,28 @@ mode --pango_markup $mode_container_resize {
         bindsym $key_mode_exit mode "default"
 }
 
+# container:toggle mode
+set_from_resource $mode_container_toggle i3wm.mode.container.toggle
+mode --pango_markup $mode_container_toggle {
+        # Toggle floating mode for container
+        bindsym semicolon floating toggle; mode "default"
+
+        # enter fullscreen mode for the focused container
+        bindsym u fullscreen; mode "default"
+
+        # go back
+        bindsym Return mode "default"
+        bindsym $key_mode_exit mode "default"
+}
+
+# container:toggle (quick bindings)
+bindsym $key_mod1+u                   fullscreen
+bindsym $key_mod1+$key_mod2+semicolon floating toggle
+
 # container:focus mode
 set_from_resource $mode_container_focus i3wm.mode.container.focus
 mode --pango_markup $mode_container_focus {
+    # Move focus across container
     bindsym h focus left
     bindsym j focus down
     bindsym k focus up
@@ -207,18 +226,22 @@ mode --pango_markup $mode_container_focus {
     bindsym p focus parent
     bindsym n focus child
 
+    # Toggle focus between tiling and floating containers
+    bindsym semicolon focus mode_toggle; mode "default"
+
     # go back
     bindsym Return mode "default"
     bindsym $key_mode_exit mode "default"
 }
 
 # container:focus (quick bindings)
-bindsym $key_mod1+h focus left
-bindsym $key_mod1+j focus down
-bindsym $key_mod1+k focus up
-bindsym $key_mod1+l focus right
-bindsym $key_mod1+p focus parent
-bindsym $key_mod1+n focus child
+bindsym $key_mod1+h         focus left
+bindsym $key_mod1+j         focus down
+bindsym $key_mod1+k         focus up
+bindsym $key_mod1+l         focus right
+bindsym $key_mod1+p         focus parent
+bindsym $key_mod1+n         focus child
+bindsym $key_mod1+semicolon focus mode_toggle
 
 # container:layout mode
 set_from_resource $mode_container_layout i3wm.mode.container.layout

@@ -67,10 +67,11 @@ i3wm.cmd.window_switcher: rofi -show window
 
 ! Binding mode indicators
 !-------------------------------------------------------------------------------
-i3wm.mode.container:        "<i>container</i> <b>m</b> → move <b>r</b> → resize <b>t</b> → term <b>e</b> → editor <b>d</b> → delete <b>u</b> → fullsreen <b>w</b> → switch <b>f</b> → focus <b>l</b> → layout"
+i3wm.mode.container:        "<i>container</i> <b>m</b> → move <b>r</b> → resize <b>t</b> → term <b>T</b> → toggle <b>e</b> → editor <b>d</b> → delete <b>w</b> → switch <b>f</b> → focus <b>l</b> → layout"
 i3wm.mode.container.move:   "<i>container:move</i> <b>hjkl</b> → move <b>asdf</b> → move to workspace"
 i3wm.mode.container.resize: "<i>container:resize</i> <b>hjkl</b> → resize"
-i3wm.mode.container.focus:  "<i>container:focus</i> <b>h</b> → left <b>j</b> → down <b>k</b> → up <b>l</b> → right <b>p</b> → parent <b>n</b> → child"
+i3wm.mode.container.toggle: "<i>container:toggle</i> <b>;</b> → floating <b>u</b> → fullscreen "
+i3wm.mode.container.focus:  "<i>container:focus</i> <b>h</b> → left <b>j</b> → down <b>k</b> → up <b>l</b> → right <b>p</b> → parent <b>n</b> → child <b>;</b> → mode_toggle"
 i3wm.mode.container.layout: "<i>container:layout</i> <b>h</b> → splith <b>v</b> → splitv <b>t</b> → tabbed <b>s</b> → stacking"
 i3wm.mode.desktop:          "<i>i3</i> <b>r</b> → restart <b>x</b> → exit <b>l</b> → lock screen"
 i3wm.mode.desktop.restart:  "<i>i3:restart</i> <b>i</b> → i3 <b>c</b> → compositor <b>a</b> → audio <b>k</b> → keynav <b>w</b> → wallpaper <b>x</b> → xrandr <b>l</b> → xsettingsd"
