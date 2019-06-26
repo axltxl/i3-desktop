@@ -36,6 +36,14 @@ packages=( stow
 sudo apt-get update
 sudo apt-get -y install ${packages[@]}
 
+# Install icon theme
+# FIXME: document me
+[[ ! -d ~/.icons ]] && mkdir ~/.icons
+cd /tmp
+rm -rf Tela-icon-theme
+git clone https://github.com/vinceliuice/Tela-icon-theme.git
+cd Tela-icon-theme; ./install.sh -purple --dest ~/.icons
+
 # python venv
 I3_VENV=~/.i3pyvenv
 
