@@ -310,6 +310,9 @@ mode --pango_markup $mode_workspace {
     # workspace:switch mode
     bindsym s mode $mode_workspace_switch
 
+    # workspace:move mode
+    bindsym m mode $mode_workspace_move
+
     # switch to previous/next workspace
     bindsym p workspace prev; mode "default"
     bindsym n workspace next; mode "default"
@@ -342,6 +345,19 @@ bindsym $key_mod1+f workspace $ws4
 # quickly switch between last two workspaces
 bindsym $key_mod1+$key_mod2+Tab workspace back_and_forth
 
+# workspace:move mode
+set_from_resource $mode_workspace_move i3wm.mode.workspace.move
+mode --pango_markup $mode_workspace_move {
+    # move workspace to a different screen
+    bindsym h move workspace to output left
+    bindsym j move workspace to output down
+    bindsym k move workspace to output up
+    bindsym l move workspace to output right
+
+    # go back
+    bindsym Return         mode "default"
+    bindsym $key_mode_exit mode "default"
+}
 
 # Multimedia keys
 #################

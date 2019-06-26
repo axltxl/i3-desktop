@@ -75,5 +75,6 @@ i3wm.mode.container.layout: "<i>container:layout</i> <b>h</b> → splith <b>v</b
 i3wm.mode.desktop:          "<i>i3</i> <b>r</b> → restart <b>x</b> → exit <b>l</b> → lock screen"
 i3wm.mode.desktop.restart:  "<i>i3:restart</i> <b>i</b> → i3 <b>c</b> → compositor <b>a</b> → audio <b>k</b> → keynav <b>w</b> → wallpaper <b>x</b> → xrandr <b>l</b> → xsettingsd"
 i3wm.mode.desktop.exit:     "Exit i3? [<b>y/n</b>]"
-i3wm.mode.workspace:        "<i>workspace</i> <b>s</b> → switch <b>p</b> → previous <b>n</b> → next"
+i3wm.mode.workspace:        "<i>workspace</i> <b>s</b> → switch <b>m</b> → move <b>p</b> → previous <b>n</b> → next"
 i3wm.mode.workspace.switch: "<i>workspace:switch</i> [<b>asdf</b>]"
+i3wm.mode.workspace.move:   "<i>workspace:move</i> [<b>hjkl</b>]→ move to screen"
