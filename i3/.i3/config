@@ -268,9 +268,6 @@ mode --pango_markup $mode_i3_restart {
     # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
     bindsym i exec i3-restart; mode "default"
 
-    # restart window compositor
-    bindsym c exec i3-compositor; mode "default"
-
     # reload xrandr settings
     bindsym x exec i3-xrandr; mode "default"
 
@@ -393,39 +390,23 @@ floating_modifier $key_mod1
 # Startup programs
 ######################
 
-# xsettingsd
-exec --no-startup-id xsettingsd
-
-# window compositor
-exec --no-startup-id i3-compositor
-
-# NetworkManager
-exec --no-startup-id nm-applet
-
-# xautolock
-exec --no-startup-id xautolock -time 8 -locker $autolock
-
 # set up screens
 exec --no-startup-id i3-xrandr
+
+# xsettingsd
+exec --no-startup-id xsettingsd
 
 # set wallpapers
 exec --no-startup-id i3-wallpaper
 
-# pulseaudio
-exec pulseaudio --start
-exec pasystray
-
-# keynav
-exec --no-startup-id i3-keynav
-
-# redshift
-exec --no-startup-id redshift-gtk
+# xautolock
+exec --no-startup-id xautolock -time 8 -locker $autolock
 
 # dunst (notifications)
 exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 
-# blueman applet (bluetooth)
-exec blueman-applet
+# XDG autostart everything in ~/.config/autostart
+exec --no-startup-id dex -as ~/.config/autostart
 
 #########################
 # Window colors
