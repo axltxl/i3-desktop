@@ -68,7 +68,7 @@ i3wm.cmd.window_switcher: rofi -show window
 ! Binding mode indicators
 !-------------------------------------------------------------------------------
 i3wm.mode.container:        "<i>container</i> <b>m</b> → move <b>r</b> → resize <b>t</b> → term <b>T</b> → toggle <b>e</b> → editor <b>d</b> → delete <b>w</b> → switch <b>f</b> → focus <b>l</b> → layout"
-i3wm.mode.container.move:   "<i>container:move</i> <b>hjkl</b> → move <b>asdf</b> → move to workspace"
+i3wm.mode.container.move:   "<i>container:move</i> <b>hjkl</b> → up|down|left|right [<b>1-4</b>] → move to workspace"
 i3wm.mode.container.resize: "<i>container:resize</i> <b>hjkl</b> → resize"
 i3wm.mode.container.toggle: "<i>container:toggle</i> <b>;</b> → floating <b>u</b> → fullscreen "
 i3wm.mode.container.focus:  "<i>container:focus</i> <b>h</b> → left <b>j</b> → down <b>k</b> → up <b>l</b> → right <b>p</b> → parent <b>n</b> → child <b>;</b> → mode_toggle <b>u</b> → urgent"
@@ -77,5 +77,5 @@ i3wm.mode.desktop:          "<i>i3</i> <b>r</b> → restart <b>x</b> → exit <b
 i3wm.mode.desktop.restart:  "<i>i3:restart</i> <b>i</b> → i3 <b>c</b> → compositor <b>a</b> → audio <b>k</b> → keynav <b>w</b> → wallpaper <b>x</b> → xrandr <b>l</b> → xsettingsd"
 i3wm.mode.desktop.exit:     "Exit i3? [<b>y/n</b>]"
 i3wm.mode.workspace:        "<i>workspace</i> <b>s</b> → switch <b>m</b> → move <b>p</b> → previous <b>n</b> → next"
-i3wm.mode.workspace.switch: "<i>workspace:switch</i> [<b>asdf</b>]"
+i3wm.mode.workspace.switch: "<i>workspace:switch</i> [<b>1-4</b>]"
 i3wm.mode.workspace.move:   "<i>workspace:move</i> [<b>hjkl</b>]→ move to screen"

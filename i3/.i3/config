@@ -163,10 +163,10 @@ mode --pango_markup $mode_container_move {
     bindsym l move right
 
     # move focused container to workspace
-    bindsym a move to workspace $ws1; mode "default"
-    bindsym s move to workspace $ws2; mode "default"
-    bindsym d move to workspace $ws3; mode "default"
-    bindsym f move to workspace $ws4; mode "default"
+    bindsym 1 move to workspace $ws1; mode "default"
+    bindsym 2 move to workspace $ws2; mode "default"
+    bindsym 3 move to workspace $ws3; mode "default"
+    bindsym 4 move to workspace $ws4; mode "default"
 
     # go back
     bindsym Return         mode "default"
@@ -178,10 +178,10 @@ bindsym $key_mod1+$key_mod2+h move left
 bindsym $key_mod1+$key_mod2+j move down
 bindsym $key_mod1+$key_mod2+k move up
 bindsym $key_mod1+$key_mod2+l move right
-bindsym $key_mod1$key_mod2+a move to workspace $ws1
-bindsym $key_mod1$key_mod2+s move to workspace $ws2
-bindsym $key_mod1$key_mod2+d move to workspace $ws3
-bindsym $key_mod1$key_mod2+f move to workspace $ws4
+bindsym $key_mod1$key_mod2+1 move to workspace $ws1
+bindsym $key_mod1$key_mod2+2 move to workspace $ws2
+bindsym $key_mod1$key_mod2+3 move to workspace $ws3
+bindsym $key_mod1$key_mod2+4 move to workspace $ws4
 
 # container:resize mode
 set_from_resource $mode_container_resize i3wm.mode.container.resize
@@ -363,10 +363,10 @@ mode --pango_markup $mode_workspace_switch {
 }
 
 # workspace:switch (quick bindings)
-bindsym $key_mod1+a workspace $ws1
-bindsym $key_mod1+s workspace $ws2
-bindsym $key_mod1+d workspace $ws3
-bindsym $key_mod1+f workspace $ws4
+bindsym $key_mod1+1 workspace $ws1
+bindsym $key_mod1+2 workspace $ws2
+bindsym $key_mod1+3 workspace $ws3
+bindsym $key_mod1+4 workspace $ws4
 
 # quickly switch between last two workspaces
 bindsym $key_mod1+$key_mod2+Tab workspace back_and_forth
