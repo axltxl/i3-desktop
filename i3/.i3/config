@@ -226,6 +226,9 @@ mode --pango_markup $mode_container_focus {
     bindsym p focus parent
     bindsym n focus child
 
+    # focus on latest urgent container
+    bindsym u [urgent=latest] focus
+
     # Toggle focus between tiling and floating containers
     bindsym semicolon focus mode_toggle; mode "default"
 
@@ -454,7 +457,7 @@ exec --no-startup-id dex -as ~/.config/autostart
 client.focused          $color_base0E $color_base0E $color_base07 $color_base0C
 client.focused_inactive $color_base03 $color_base03 $color_base00 $color_base05
 client.unfocused        $color_base01 $color_base01 $color_base03 $color_base03
-client.urgent           $color_base08 $color_base08 $color_base07 $color_base0C
+client.urgent           $color_base0A $color_base0A $color_base01 $color_base0C
 
 ###################
 # Window properties
