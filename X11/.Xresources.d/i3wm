@@ -67,7 +67,7 @@ i3wm.cmd.window_switcher: rofi -show window
 
 ! Binding mode indicators
 !-------------------------------------------------------------------------------
-i3wm.mode.container:            "<i>container</i> <b>m</b> → move <b>r</b> → resize <b>t</b> → term <b>T</b> → toggle <b>e</b> → editor <b>d</b> → delete <b>w</b> → switch <b>f</b> → focus <b>l</b> → layout <b>p</b> → music player"
+i3wm.mode.container:            "<i>container</i> <b>e</b> → editor <b>t</b> → term <b>p</b> → music player <b>b</b> → browser <b>m</b> → move <b>r</b> → resize <b>T</b> → toggle <b>d</b> → delete <b>w</b> → switch <b>f</b> → focus <b>l</b> → layout"
 i3wm.mode.container.move:       "<i>container:move</i> <b>hjkl</b> → up|down|left|right [<b>1-4</b>] → move to workspace"
 i3wm.mode.container.resize:     "<i>container:resize</i> <b>hjkl</b> → resize"
 i3wm.mode.container.toggle:     "<i>container:toggle</i> <b>;</b> → floating <b>u</b> → fullscreen "

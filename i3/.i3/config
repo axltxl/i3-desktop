@@ -82,8 +82,8 @@ set_from_resource $cmd_wallpaper_manager       i3wm.cmd.wpmgr
 set_from_resource $cmd_wallpaper_manager_class i3wm.cmd.wpmgr.win_class
 
 # www browser
-set_from_resource $browser                     i3wm.cmd.browser
-set_from_resource $browser_class               i3wm.cmd.browser.win_class
+set_from_resource $cmd_browser                 i3wm.cmd.browser
+set_from_resource $cmd_browser_class           i3wm.cmd.browser.win_class
 
 # terminal of choice
 set_from_resource $cmd_term                    i3wm.cmd.term i3-sensible-terminal
@@ -133,6 +133,9 @@ mode --pango_markup $mode_container {
 
     # switch to music player
     bindsym p exec i3-run $cmd_au_player $cmd_au_player_class; mode "default"
+
+    # switch to browser
+    bindsym b exec i3-run $cmd_browser $cmd_browser_class; mode "default"
 
     # kill focused container
     bindsym d kill; mode "default"
