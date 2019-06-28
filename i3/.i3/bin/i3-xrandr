@@ -2,8 +2,17 @@
 # Load xrandr settings for multiple monitors
 # xrandr settings are expected at ~/.xrandr
 
+# To begin with, reset all workspacess and set them
+# to the primary output
+for workspace_number in `seq 1 4`; do
+    i3-msg "workspace $workspace_number; move workspace to output primary"
+done
+
+# Custom xrandr settings are expected here
 xrandr_file=~/.xrandr
+
+# Execute custom xrandr file
 [[ -f "$xrandr_file" ]] && . $xrandr_file
 
-# Restore wallpapers
+# Restore wallpaper settings
 exec i3-wallpaper
