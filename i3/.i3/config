@@ -438,7 +438,6 @@ bindsym XF86MonBrightnessUp   exec $cmd_backlight_up
  # decrease screen brightness
 bindsym XF86MonBrightnessDown exec $cmd_backlight_dn
 
-############################
 # Floating modifier settings
 ############################
 
@@ -446,7 +445,6 @@ bindsym XF86MonBrightnessDown exec $cmd_backlight_dn
 # to their wanted position
 floating_modifier $key_mod1
 
-######################
 # Startup programs
 ######################
 
@@ -468,18 +466,14 @@ exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 # XDG autostart everything in ~/.config/autostart
 exec --no-startup-id dex -as ~/.config/autostart
 
-#########################
-# Window colors
-#########################
+# Window properties
+###################
 
+# Window colors
 client.focused          $color_base0E $color_base0E $color_base07 $color_base0C
 client.focused_inactive $color_base03 $color_base03 $color_base00 $color_base05
 client.unfocused        $color_base01 $color_base01 $color_base03 $color_base03
 client.urgent           $color_base0A $color_base0A $color_base01 $color_base0C
-
-###################
-# Window properties
-###################
 
 # Border style for windows
 title_align center
@@ -487,7 +481,6 @@ title_align center
 # Window borders
 default_border pixel 1
 
-#######################
 # Workspaces properties
 #######################
 
@@ -497,8 +490,7 @@ workspace_layout tabbed
 # Mouse does not dictate focus!
 focus_follows_mouse no
 
-######################
-# i3 bar configuration
+# bar configuration
 ######################
 
 bar {
