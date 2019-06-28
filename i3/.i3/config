@@ -26,10 +26,10 @@ set_from_resource $color_base0F i3wm.color_base0F
 ####################
 
 # Set keyboard mappings
-exec xmodmap ~/.Xmodmap
+exec_always xmodmap ~/.Xmodmap
 
 # Set keyboard rates
-exec xset r rate 200 60
+exec_always xset r rate 200 60
 
 ## Modifier settings
 ####################
