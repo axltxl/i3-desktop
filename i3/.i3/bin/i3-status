@@ -1,0 +1,3 @@
+#!/bin/sh
+# Run i3pystatus
+exec i3py status

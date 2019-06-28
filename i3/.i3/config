@@ -91,7 +91,6 @@ set_from_resource $cmd_term_class              i3wm.cmd.term.win_class
 
 # i3pystatus
 set_from_resource $cmd_status                  i3wm.cmd.status
-set_from_resource $cmd_status_conf             i3wm.cmd.status.conf
 
 # app launcher
 set_from_resource $cmd_app_launcher            i3wm.cmd.launcher
@@ -504,7 +503,7 @@ bar {
     tray_output primary
 
     # i3pystatus is awesome!!
-    status_command $cmd_status $cmd_status_conf
+    status_command $cmd_status
 
     # The actual colors
     colors {

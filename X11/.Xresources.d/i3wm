@@ -56,8 +56,7 @@ i3wm.cmd.term:           urxvt
 i3wm.cmd.term.win_class: URxvt
 
 ! status used for i3bar
-i3wm.cmd.status:      ~/.i3pyvenv/bin/python3
-i3wm.cmd.status.conf: ~/.i3/status.py
+i3wm.cmd.status:      i3-status
 
 ! app launcher
 i3wm.cmd.launcher: "rofi -modi combi -show combi -combi-modi 'drun,run'"

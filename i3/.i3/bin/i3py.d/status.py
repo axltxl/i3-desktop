@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 ################################
 # i3pystatus configuration file.
 ################################
