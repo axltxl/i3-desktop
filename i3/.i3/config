@@ -86,8 +86,8 @@ set_from_resource $browser                     i3wm.cmd.browser
 set_from_resource $browser_class               i3wm.cmd.browser.win_class
 
 # terminal of choice
-set_from_resource $term                        i3wm.cmd.term i3-sensible-terminal
-set_from_resource $term_class                  i3wm.cmd.term.win_class
+set_from_resource $cmd_term                    i3wm.cmd.term i3-sensible-terminal
+set_from_resource $cmd_term_class              i3wm.cmd.term.win_class
 
 # i3pystatus
 set_from_resource $cmd_status                  i3wm.cmd.status
@@ -126,10 +126,13 @@ mode --pango_markup $mode_container {
     bindsym r mode $mode_container_resize
 
     # switch to terminal
-    bindsym t exec i3-run $term $term_class; mode "default"
+    bindsym t exec i3-run $cmd_term $cmd_term_class; mode "default"
 
     # switch to editor
     bindsym e exec i3-run $cmd_editor $cmd_editor_class; mode "default"
+
+    # switch to music player
+    bindsym p exec i3-run $cmd_au_player $cmd_au_player_class; mode "default"
 
     # kill focused container
     bindsym d kill; mode "default"
@@ -178,10 +181,10 @@ bindsym $key_mod1+$key_mod2+h move left
 bindsym $key_mod1+$key_mod2+j move down
 bindsym $key_mod1+$key_mod2+k move up
 bindsym $key_mod1+$key_mod2+l move right
-bindsym $key_mod1$key_mod2+1 move to workspace $ws1
-bindsym $key_mod1$key_mod2+2 move to workspace $ws2
-bindsym $key_mod1$key_mod2+3 move to workspace $ws3
-bindsym $key_mod1$key_mod2+4 move to workspace $ws4
+bindsym $key_mod1+$key_mod2+1 move to workspace $ws1
+bindsym $key_mod1+$key_mod2+2 move to workspace $ws2
+bindsym $key_mod1+$key_mod2+3 move to workspace $ws3
+bindsym $key_mod1+$key_mod2+4 move to workspace $ws4
 
 # container:resize mode
 set_from_resource $mode_container_resize i3wm.mode.container.resize
@@ -339,6 +342,9 @@ mode --pango_markup $mode_workspace {
     # workspace:move mode
     bindsym m mode $mode_workspace_move
 
+    # workspace:scratchpad mode
+    bindsym shift+s mode $mode_workspace_scratchpad
+
     # switch to previous/next workspace
     bindsym p workspace prev; mode "default"
     bindsym n workspace next; mode "default"
@@ -384,6 +390,18 @@ mode --pango_markup $mode_workspace_move {
     bindsym Return         mode "default"
     bindsym $key_mode_exit mode "default"
 }
+
+# workspace:scratchpad mode
+set_from_resource $mode_workspace_scratchpad i3wm.mode.workspace.scratchpad
+mode --pango_markup $mode_workspace_scratchpad {
+    # show all windows in the scratchpad workspace
+    bindsym s scratchpad show; mode "default"
+
+    # go back
+    bindsym Return         mode "default"
+    bindsym $key_mode_exit mode "default"
+}
+
 
 # Multimedia keys
 #################
@@ -505,3 +523,8 @@ bar {
         binding_mode       $color_base0C $color_base0C $color_base01
     }
 }
+
+# scratchpad
+############
+for_window [class=$cmd_au_player_class] move scratchpad
+for_window [class=$cmd_term_class] move scratchpad

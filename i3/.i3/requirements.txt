@@ -4,3 +4,6 @@ netifaces
 colour
 basiciw
 dbus-python
+i3ipc
+pgrep
+ipdb

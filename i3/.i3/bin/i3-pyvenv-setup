@@ -1,0 +1,12 @@
+#!/bin/bash
+# Setup python3 virtual environment for i3 utilities
+set -e
+
+I3_VENV=~/.i3pyvenv
+I3_HOME=~/.i3
+
+[[ -a "$I3_VENV" ]] && rm -rf $I3_VENV
+mkdir $I3_VENV
+python3 -m venv $I3_VENV
+. $I3_VENV/bin/activate
+pip3 install -r ${I3_HOME}/requirements.txt

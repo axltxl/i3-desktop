@@ -1,0 +1,15 @@
+#!/bin/bash
+# Usage: i3py <cmd> [args ...]
+
+# Absolute path to this script
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Activate i3py virtualenv
+. ~/.i3pyvenv/bin/activate
+
+# if arguments are specified, first argument should specify
+# a scriot in i3py.d to run using the virtualenv
+[[ -n "$@" ]] && exec ${script_dir}/i3py.d/${1}.py ${@:2}
+
+# otherwise, use the venv repl
+exec python3

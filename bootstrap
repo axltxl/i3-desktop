@@ -23,8 +23,8 @@ packages=( stow
            rxvt-unicode
            nitrogen
            playerctl
-           python3-venv
            build-essential
+           python3-venv
            libpython3-dev
            libiw-dev
            libdbus-1-dev
